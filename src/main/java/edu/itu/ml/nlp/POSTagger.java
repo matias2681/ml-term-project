@@ -3,6 +3,7 @@ package edu.itu.ml.nlp;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import opennlp.tools.postag.POSModel;
 import opennlp.tools.postag.POSTaggerME;
@@ -15,7 +16,8 @@ public class POSTagger {
 
 	public POSTagger() {
 		try {
-			modelIn = new FileInputStream("resouces/en-pos-perceptron.bin");
+			URL urlPath = this.getClass().getClassLoader().getResource("en-pos-perceptron.bin");
+			modelIn = new FileInputStream(urlPath.getPath());
 			POSModel model = new POSModel(modelIn);
 			tagger = new POSTaggerME(model);
 		} catch (IOException e) {
@@ -28,6 +30,10 @@ public class POSTagger {
 				}
 			}
 		}
+	}
+	
+	public String[] tag(String[] sentence) {
+		return tagger.tag(sentence);
 	}
 
 
