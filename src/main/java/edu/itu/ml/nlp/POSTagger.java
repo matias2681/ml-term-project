@@ -16,7 +16,7 @@ public class POSTagger {
 
 	public POSTagger() {
 		try {
-			URL urlPath = this.getClass().getClassLoader().getResource("en-pos-perceptron.bin");
+			URL urlPath = this.getClass().getClassLoader().getResource(Constants.FILE_POSTAGGER_MODEL_PERCEPTRON);
 			modelIn = new FileInputStream(urlPath.getPath());
 			POSModel model = new POSModel(modelIn);
 			tagger = new POSTaggerME(model);
