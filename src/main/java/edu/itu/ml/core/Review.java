@@ -1,6 +1,10 @@
 package edu.itu.ml.core;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Instant;
+
+import edu.itu.ml.nlp.TextAnalysis;
 
 public class Review {
 	
@@ -96,6 +100,27 @@ public class Review {
 		this.time = reviewBuilder.time;
 		this.summary = reviewBuilder.summary;
 		this.text = reviewBuilder.text;
+	}
+	
+	public FeatureItem extractFeatures() {
+		int days = Days.daysBetween(this.time, Instant.now()).getDays();
+		TextAnalysis textAnalysis = new TextAnalysis(this);
+		
+		FeatureItem item = new FeatureItem.FeatureItemBuilder().age(days)
+				.normUserRating(this.score)
+				.numSentences(textAnalysis.numSentences())
+				.numWords(textAnalysis.numWords())
+				.numSentimental(textAnalysis.getSentiment())
+				.build();
+		return item;
+	}
+
+	public String getText() {
+		return this.text;
+	}
+
+	public String getSummary() {
+		return this.summary;
 	}
 
 }

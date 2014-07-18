@@ -35,7 +35,5 @@ public class POSTagger {
 	public String[] tag(String[] sentence) {
 		return tagger.tag(sentence);
 	}
-
-
-
+	
 }
