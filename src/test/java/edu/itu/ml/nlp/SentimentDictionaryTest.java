@@ -39,5 +39,10 @@ public class SentimentDictionaryTest {
 	    Assert.assertTrue(sentimentDictionary.extract("good", "RB").equals(sentimentDictionary.extract("good", "RBS")));
 	    Assert.assertFalse(sentimentDictionary.extract("good", "RB").equals(sentimentDictionary.extract("not_exist_value", "RBS")));
 	}
+	
+	@Test
+	public void testResultNotExistValue() {
+	    System.out.println(sentimentDictionary.extract("not_exist_value", "RB"));
+	}
 
 }

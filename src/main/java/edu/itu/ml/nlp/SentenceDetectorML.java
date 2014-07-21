@@ -1,5 +1,6 @@
 package edu.itu.ml.nlp;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -17,7 +18,7 @@ public class SentenceDetectorML {
 		InputStream modelIn = null;
 		try {
 			URL urlPath = this.getClass().getClassLoader().getResource(Constants.FILE_SENTENCE_DETECTOR_MODEL);
-			modelIn = getClass().getResourceAsStream(urlPath.getPath());
+			modelIn = new FileInputStream(urlPath.getPath());
 			final SentenceModel sentenceModel = new SentenceModel(modelIn);
 			modelIn.close();
 			

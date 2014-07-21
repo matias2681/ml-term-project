@@ -28,11 +28,15 @@ public class SentimentValue {
 		return this;
 	}
 
-	public String tostring() {
+	public String toString() {
 		return String.format("+ %f, - %f, o %f", this.positive, this.negative, this.objetive);
 	}
 	
 	public boolean equals(SentimentValue target) {
 		return (this.positive == target.positive && this.negative == target.negative);
+	}
+
+	public boolean isEmpty() {
+		return this.positive == 0d && this.negative == 0d;
 	}
 }

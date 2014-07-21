@@ -5,7 +5,6 @@ import edu.itu.ml.nlp.SentimentValue;
 
 public class FeatureItem {
 
-
 	private long age;
 	private double normUserRating;
 	private long numSentences;
@@ -13,7 +12,7 @@ public class FeatureItem {
 	private SentimentValue numSentimental;
 	private SentimentValue sentimentRating;
 	private SentimentValue density;
-	private long wordsPerSentence;
+	private double wordsPerSentence;
 
 	public FeatureItem(FeatureItemBuilder featureItemBuilder) {
 		this.age = featureItemBuilder.age;
@@ -21,9 +20,9 @@ public class FeatureItem {
 		this.numSentences = featureItemBuilder.numSentences;
 		this.numWords = featureItemBuilder.numWords;
 		this.numSentimental = featureItemBuilder.numSentimental;
-		this.sentimentRating = featureItemBuilder.sentimentRating.div(this.normUserRating);
-		this.density = featureItemBuilder.density.div(this.numWords);
-		this.wordsPerSentence = featureItemBuilder.wordsPerSentence;
+		this.sentimentRating = featureItemBuilder.numSentimental.div(this.normUserRating);
+		this.density = featureItemBuilder.numSentimental.div(this.numWords);
+		this.wordsPerSentence = Double.valueOf(featureItemBuilder.numWords) / Double.valueOf(featureItemBuilder.numSentences);
 	}
 	
 	public static class FeatureItemBuilder {
@@ -32,9 +31,6 @@ public class FeatureItem {
 		private long numSentences;
 		private long numWords;
 		private SentimentValue numSentimental;
-		private SentimentValue sentimentRating;
-		private SentimentValue density;
-		private long wordsPerSentence;
 		
 		public FeatureItemBuilder age(long age) {
 			this.age = age;
@@ -61,14 +57,20 @@ public class FeatureItem {
 			return this;
 		}
 		
-		public FeatureItemBuilder wordsPerSentence(long wordsPerSentence) {
-			this.wordsPerSentence = wordsPerSentence;
-			return this;
-		}
-		
 		public FeatureItem build() {
 			return new FeatureItem(this);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "FeatureItem [age=" + age + ", normUserRating=" + normUserRating
+				+ ", numSentences=" + numSentences + ", numWords=" + numWords
+				+ ", numSentimental=" + numSentimental + ", sentimentRating="
+				+ sentimentRating + ", density=" + density
+				+ ", wordsPerSentence=" + wordsPerSentence + "]";
+	}
+	
+	
 	
 }
