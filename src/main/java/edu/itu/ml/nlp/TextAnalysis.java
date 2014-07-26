@@ -15,10 +15,17 @@ public class TextAnalysis {
 	private TokenizerML tokenizer = new TokenizerML();
 	private String[] sentences;
 	private SentimentDictionary dictionary = new SentimentDictionary();
+	private static TextAnalysis instance = new TextAnalysis();
 	
-	public TextAnalysis(Review review) {
+	private TextAnalysis() {
+	}
+	
+	public static TextAnalysis getInstance() {
+		return instance;
+	}
+	
+	public void analyze(Review review) {
 		this.text = review.getText();
-		//this.summary = review.getSummary();
 	}
 
 	public SentimentValue getSentiment() {

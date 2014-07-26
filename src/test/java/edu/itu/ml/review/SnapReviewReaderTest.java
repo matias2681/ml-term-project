@@ -1,7 +1,6 @@
 package edu.itu.ml.review;
 
-import java.io.IOException;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,16 +8,22 @@ import edu.itu.ml.core.Review;
 
 public class SnapReviewReaderTest {
 	
-	SnapReviewReader snapReviewReader; 
+	ReviewReader reviewReader; 
 	
 	@Before
 	public void setup() throws Exception {
-		snapReviewReader = new SnapReviewReader();
+		reviewReader = new SnapReviewReader();
 	}
 
 	@Test
-	public void testOriginalFormat() throws IOException {
-		Review review1 = snapReviewReader.getNext();
-		Review review2 = snapReviewReader.getNext();
+	public void testReadReviewsWithOriginalFormat() {
+		Review review;
+		int numberReviewsRead = 0;
+		while(reviewReader.hasNext()) {
+			numberReviewsRead++;
+			review = reviewReader.getNext();
+			Assert.assertNotNull(review);
+		}
+		Assert.assertEquals(237, numberReviewsRead);
 	}
 }

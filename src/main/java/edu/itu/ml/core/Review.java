@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 import org.joda.time.Instant;
 
+import edu.itu.ml.Constants;
 import edu.itu.ml.nlp.TextAnalysis;
 
 public class Review {
@@ -42,7 +43,11 @@ public class Review {
 		}
 		
 		public ReviewBuilder productPrice(String price) {
-			this.productPrice = Double.parseDouble(price);
+			if (Constants.UNKNOWN_PRICE.equals(price)) {
+				this.productPrice = Double.parseDouble("0");
+			} else {
+				this.productPrice = Double.parseDouble(price);
+			}
 			return this;
 		}
 		
@@ -104,7 +109,8 @@ public class Review {
 	
 	public FeatureItem extractFeatures() {
 		int days = Days.daysBetween(this.time, Instant.now()).getDays();
-		TextAnalysis textAnalysis = new TextAnalysis(this);
+		TextAnalysis textAnalysis = TextAnalysis.getInstance();
+		textAnalysis.analyze(this);
 		
 		FeatureItem item = new FeatureItem.FeatureItemBuilder().age(days)
 				.normUserRating(this.score)
