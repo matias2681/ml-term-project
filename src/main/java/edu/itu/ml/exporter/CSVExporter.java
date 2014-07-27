@@ -25,7 +25,7 @@ public class CSVExporter {
 
 	public void write(FeatureItem featureItem) {
 		try {
-			writer.writeNext(featureItem.toCVS());
+			writer.writeNext(featureItem.toCSV());
 			writer.flush();
 		} catch (IOException e) {
 			throw new RuntimeException(Constants.ERROR_WHILE_WRITING_CSV, e);
