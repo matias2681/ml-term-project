@@ -74,7 +74,7 @@ public class FeatureItem {
 				+ ", wordsPerSentence=" + wordsPerSentence + "]";
 	}
 
-	public String[] toCVS() {
+	public String[] toCSV() {
 		String[] numSentimentalValues = numSentimental.toCSV();
 		String[] sentimentRatingValues = sentimentRating.toCSV();
 		String[] densityValues = density.toCSV();

@@ -28,7 +28,6 @@ public class SnapReviewReader implements ReviewReader {
 		}
 	}
 
-	@Override
 	public Review getNext() {
 		String productId = null;
 		String producTitle = null;
@@ -45,25 +44,25 @@ public class SnapReviewReader implements ReviewReader {
 
 		while ((line = this.lineIterator.nextLine()) != null) {
 			if (!line.equals("")) {
-				if (line.matches("product/productId: (.*)")) {
+				if (null == productId && line.matches("product/productId: (.*)")) {
 					productId = line.substring("product/productId: ".length());
-				} else if (line.matches("product/title: (.*)")) {
+				} else if (null == producTitle && line.matches("product/title: (.*)")) {
 					producTitle = line.substring("product/title: ".length());
-				} else if (line.matches("product/price: (.*)")) {
+				} else if (null == productPrice && line.matches("product/price: (.*)")) {
 					productPrice = line.substring("product/price: ".length());
-				} else if (line.matches("review/userId: (.*)")) {
+				} else if (null == userId && line.matches("review/userId: (.*)")) {
 					userId = line.substring("review/UserId: ".length());
-				} else if (line.matches("review/profileName: (.*)")) {
+				} else if (null == profileName && line.matches("review/profileName: (.*)")) {
 					profileName = line.substring("review/profileName: "
 							.length());
-				} else if (line.matches("review/helpfulness: (.*)")) {
+				} else if (null == helpfulness && line.matches("review/helpfulness: (.*)")) {
 					helpfulness = line.substring("review/helpfulness: "
 							.length());
-				} else if (line.matches("review/score: (.*)")) {
+				} else if (null == score && line.matches("review/score: (.*)")) {
 					score = line.substring("review/score: ".length());
-				} else if (line.matches("review/time: (.*)")) {
+				} else if (null == time && line.matches("review/time: (.*)")) {
 					time = line.substring("review/time: ".length());
-				} else if (line.matches("review/summary: (.*)")) {
+				} else if (null == summary && line.matches("review/summary: (.*)")) {
 					summary = line.substring("review/summary: ".length());
 				} else if (line.matches("review/text: (.*)")) {
 					text = line.substring("review/text: ".length());
@@ -82,7 +81,6 @@ public class SnapReviewReader implements ReviewReader {
 		return review;
 	}
 
-	@Override
 	public boolean hasNext() {
 		boolean value =  lineIterator.hasNext();
 		if (!value) {
