@@ -20,5 +20,6 @@ public interface Constants {
 	int NEGATIVE = 1;
 	int OBJECTIVE = 2;
 	String ERROR_WHILE_OPEN_REVIEW_FILE = "There was an error while opening the reviews file";
+	String INDEX_FOLDER = "index";
 
 }
