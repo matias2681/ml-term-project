@@ -15,7 +15,9 @@ public class TextAnalysis {
 	private TokenizerML tokenizer = new TokenizerML();
 	private String[] sentences;
 	private SentimentDictionary dictionary = new SentimentDictionary();
+	private Lemmatizer lemmatizer = new Lemmatizer();
 	private static TextAnalysis instance = new TextAnalysis();
+	
 	
 	private TextAnalysis() {
 	}
@@ -35,9 +37,8 @@ public class TextAnalysis {
 			String[] sentenceSplit = this.convertSentenceTo(sentence);
 			String[] tags = tagger.tag(sentenceSplit);
 			for (int i = 0; i < sentenceSplit.length; i++) {
-				//TODO here we need to use a lemmatizer.
-				//Add opennlp version 1.6.0 it has a lemmatizer. 
-				SentimentValue value = dictionary.extract(sentenceSplit[i], tags[i]);
+				String lemmatizedWord = lemmatizer.lemmatize(sentenceSplit[i]);
+				SentimentValue value = dictionary.extract(lemmatizedWord, tags[i]);
 				if (!value.isEmpty()) {
 					total.add(value);
 					num++;

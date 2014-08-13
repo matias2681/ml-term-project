@@ -6,15 +6,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
+
+import org.jfree.util.Log;
+import org.joda.time.Interval;
+import org.joda.time.Period;
 
 import edu.itu.ml.Constants;
 
 public class SentimentDictionary {
 
+	private final static Logger LOG = Logger.getLogger(SentimentDictionary.class.getName());
     private Map<String, SentimentValue> dic_Senti;
     private Map<String, String> dic_NlpToSenti; // tag pos mapping from NLP format to SentiNetWord format
     
     public SentimentDictionary() {
+    	LOG.info("Loading Sentiment Dictionary");
+    	long begin = System.currentTimeMillis(); 
     	// Generate a map from openNLP pos format to SentiWordNet pos format.
     	create_openNLP_to_SentiWordNet_map() ;
         
@@ -111,6 +119,9 @@ public class SentimentDictionary {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+        	long end = System.currentTimeMillis();
+        	Period period = new Period(begin, end);
+        	Log.info("Loading the Sentiment Dictionary took: " + period.getSeconds() + " seconds");
             if (csv != null) {
                 try {
                     csv.close();

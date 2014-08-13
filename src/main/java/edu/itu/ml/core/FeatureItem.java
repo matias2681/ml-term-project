@@ -5,6 +5,7 @@ import edu.itu.ml.nlp.SentimentValue;
 
 public class FeatureItem {
 
+	private boolean useful;
 	private long age;
 	private double normUserRating;
 	private long numSentences;
@@ -15,6 +16,7 @@ public class FeatureItem {
 	private double wordsPerSentence;
 
 	public FeatureItem(FeatureItemBuilder featureItemBuilder) {
+		this.useful = featureItemBuilder.useful;
 		this.age = featureItemBuilder.age;
 		this.normUserRating = featureItemBuilder.normUserRating
 				/ Constants.MAX_NUM_STARS;
@@ -29,11 +31,17 @@ public class FeatureItem {
 	}
 
 	public static class FeatureItemBuilder {
+		private boolean useful;
 		private long age;
 		private double normUserRating;
 		private long numSentences;
 		private long numWords;
 		private SentimentValue numSentimental;
+		
+		public FeatureItemBuilder useful(boolean useful) {
+			this.useful = useful;
+			return this;
+		}
 
 		public FeatureItemBuilder age(long age) {
 			this.age = age;
@@ -67,7 +75,7 @@ public class FeatureItem {
 
 	@Override
 	public String toString() {
-		return "FeatureItem [age=" + age + ", normUserRating=" + normUserRating
+		return "FeatureItem [ useful= " + useful + " age=" + age + ", normUserRating=" + normUserRating
 				+ ", numSentences=" + numSentences + ", numWords=" + numWords
 				+ ", numSentimental=" + numSentimental + ", sentimentRating="
 				+ sentimentRating + ", density=" + density
@@ -78,7 +86,9 @@ public class FeatureItem {
 		String[] numSentimentalValues = numSentimental.toCSV();
 		String[] sentimentRatingValues = sentimentRating.toCSV();
 		String[] densityValues = density.toCSV();
-		return new String[] { String.valueOf(age),
+		return new String[] {
+				(useful) ? "useful" : "unuseful",
+				String.valueOf(age),
 				String.valueOf(normUserRating), String.valueOf(numSentences),
 				String.valueOf(numWords),
 				numSentimentalValues[Constants.POSITIVE],
@@ -94,7 +104,7 @@ public class FeatureItem {
 	}
 
 	public static String[] columns() {
-		return new String[] { "age", "normUserRating", "numSentences",
+		return new String[] { "usefulness", "age", "normUserRating", "numSentences",
 				"numWords", "numSentimental+", "numSentimental-",
 				"numSentimentalo", "sentimentRating+", "sentimentRating-",
 				"sentimentRatingo", "density+", "density-", "densityo",

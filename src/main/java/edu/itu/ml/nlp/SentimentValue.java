@@ -15,7 +15,6 @@ public class SentimentValue {
 	public SentimentValue add(SentimentValue aSentiment) {
 		this.positive += aSentiment.positive;
 		this.negative += aSentiment.negative;
-		// this.objetive += aSentiment.objetive;
 		this.objetive = 1 - (this.positive + this.negative);
 		return this;
 	}
@@ -23,7 +22,6 @@ public class SentimentValue {
 	public SentimentValue div(double divValue) {
 		this.positive /= divValue;
 		this.negative /= divValue;
-		// this.objetive /= divValue;
 		this.objetive = 1 - (this.positive + this.negative);
 		return this;
 	}

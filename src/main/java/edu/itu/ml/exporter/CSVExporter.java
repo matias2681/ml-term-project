@@ -3,10 +3,12 @@ package edu.itu.ml.exporter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.List;
 
 import au.com.bytecode.opencsv.CSVWriter;
 import edu.itu.ml.Constants;
 import edu.itu.ml.core.FeatureItem;
+import edu.itu.ml.core.Review;
 
 public class CSVExporter {
 
@@ -15,7 +17,7 @@ public class CSVExporter {
 	public CSVExporter() {
 		try {
 			writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(
-					Constants.FEATURE_FILE_AND_PATH), "UTF-8"), '\t');
+					Constants.FEATURE_FILE_AND_PATH), "UTF-8"), Constants.SEPARATOR_SYMBOL);
 			writer.writeNext(FeatureItem.columns());
 			writer.flush();
 		} catch (IOException e) {
@@ -32,4 +34,10 @@ public class CSVExporter {
 		}
 	}
 
+	public void write(List<Review> reviews) {
+		for (Review review : reviews) {
+			write(review.extractFeatures());
+		}
+	}
+	
 }
