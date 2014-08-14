@@ -15,7 +15,7 @@ public class ReviewClassificationMain {
 
 	public static void main(String[] args) throws Exception {
 		List<Feature> features = Lists.newArrayList(new FeaturesParser(
-				"features-no-nan-1.csv"));
+				"features-no-nan.csv"));
 
 		double heldOutPercentage = 0.10;
 
