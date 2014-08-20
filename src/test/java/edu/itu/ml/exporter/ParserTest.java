@@ -8,17 +8,27 @@ import edu.itu.ml.core.ReviewBaseTest;
 
 public class ParserTest extends ReviewBaseTest{
 
-	private Parser parser = new Parser();
+	private Parser parser;
 	
 	@Before
 	public void setUp() throws Exception {
 	}
 
-	@Test
 	public void test() {
+		parser = new Parser();
 		try {
 			parser.run();
 		} catch(Exception e) {
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void testParserWithLimit() {
+		parser = new Parser(5000);
+		try {
+			parser.run();
+		} catch (Exception e) {
 			Assert.fail();
 		}
 	}

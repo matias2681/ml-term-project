@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import org.jfree.util.Log;
-import org.joda.time.Interval;
 import org.joda.time.Period;
 
 import edu.itu.ml.Constants;

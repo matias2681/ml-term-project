@@ -1,0 +1,69 @@
+ml-term-project
+===============
+
+This project was built using Maven 3.0.4
+You can download maven from http://maven.apache.org/
+This tool help to resolve dependencies and build the project in an easy way.
+Also, given that the Mahout community is making extensive use of maven is easy to integrate everything with maven.
+
+The review data set can be downloaded from the project SNAP
+http://snap.stanford.edu/data/web-Amazon-links.html
+From those links we used the one that is named Electronics.txt.gz
+Have in mind that extracted the file requeries 1.1Gb of space.
+
+Once extracted the file you have to copy the same to the folder src/main/resources of the project.
+It is important that the name of the file be "Electronics.txt"
+
+To run the code we generated a jar runnable from Eclipse.
+In order to do this you have to run the following command from maven in a console.
+The path directory must be where the file pom.xml of the project is.
+
+mvn eclipse:clean eclipse:eclipse
+
+After that you can import the source code in Eclipse. To import the code to Eclipse:
+	1) Copy the folder ml-term-project with the source code to you workspace.
+	2) Open Eclipse
+	3) Go to the menu File -> Import
+	4) Select the option "Existing Projects into Workspace" press next.
+	5) Select the option "Select root directory" press the browse button and
+	select the folder with the source code.
+	6) then press finish.
+
+To generate the file with the features to feed the machine learning algorithm you have 2 options.
+1) Extract all the features (more than 1M) from the Electronics.txt file.
+2) Extract a number of reviews from the Electronics.txt file.
+For the 1st option you can run the Parser.java file going to the Run menu and then choose the option "Run As" and select 
+the option "Java Application".
+For the 2nd option you have to run the same file (Parser.java) but with an argument which is the number of reviews that 
+you want.   
+
+To add the arguments to Eclipse to run a program in general you need to follow this steps:
+	1) Go to the menu Run -> Run Configurations
+	2) In the first icon of the upper left of the new window click in the button that says "New launch configuration".
+	2) In the "Project" field write: {name of the project where is the code} In this case is ml-term-project
+	3) In the "Main class" field write: {Name of the class that has the main method} In this case is edu.itu.ml.exporter.Parser
+	4) Go to the second tab named "Arguments"
+	5) In the field "Program arguments" write add the arguments. In this case is just a number like: 10000
+
+This Parser will generate the features in a CSV file. The file will be features.csv. 	
+
+After extract the features is necessary to remove all the records with NaN value in any of the predictor variables, 
+otherwise, that would give a wrong answer. To remove those records you can ran the script in 
+	src/script/clean-nan-values.sh
+
+Those records are the result of some reviews that doesn't have text to generate a sentimental analysis.
+
+That script will generate a new file named features-no-nan.csv  
+Then you can split the last file to have a training data set and a test data set.
+For example, if the file has N records (lines) taking the first L lines for training and the rest for test.
+Note: You can check how many lines there is in a file executing: wc -l {file-name} 
+To do that you can run in a bash console.
+head -n L features-no-nan.csv > train.csv
+tail -n (N-L) features-no-nan.csv > test.csv
+
+To remove the first column from the test.csv file you can run
+awk 'BEGIN { FS=","; OFS="," } {$1="";gsub(",+",",",$0)}1' test.csv > test-1.csv
+head -1 train.csv | cat - test-1.csv > test.csv
+
+To run the SGD algorithm you can copy those files (train.csv and test.csv) to src/main/resources and
+run ReviewClassificationWithTestFileMain.

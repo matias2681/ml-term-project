@@ -6,11 +6,16 @@ import org.apache.mahout.classifier.evaluation.Auc;
 import org.apache.mahout.classifier.sgd.L1;
 import org.apache.mahout.classifier.sgd.OnlineLogisticRegression;
 
+/**
+ * This class execute the SGD algorithm with
+ *
+ */
 public class ReviewClassificationWithTestFileMain {
 
 	public static final int NUM_CATEGORIES = 2;
 	private final static Logger LOG = Logger.getLogger(ReviewClassificationWithTestFileMain.class.getName());
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception {
 		for (int run = 0; run < 50; run++) {
 			OnlineLogisticRegression lr = new OnlineLogisticRegression(

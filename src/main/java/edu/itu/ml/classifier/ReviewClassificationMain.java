@@ -13,6 +13,7 @@ public class ReviewClassificationMain {
 
 	public static final int NUM_CATEGORIES = 2;
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception {
 		List<Feature> features = Lists.newArrayList(new FeaturesParser(
 				"features-no-nan.csv"));

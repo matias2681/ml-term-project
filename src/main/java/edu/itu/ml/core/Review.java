@@ -7,6 +7,7 @@ import org.joda.time.Instant;
 import edu.itu.ml.Constants;
 import edu.itu.ml.nlp.TextAnalysis;
 
+@SuppressWarnings("unused")
 public class Review {
 	
 	private final String productId;
@@ -130,42 +131,12 @@ public class Review {
 		return item;
 	}
 	
-	
-
 	public String getProductId(){
 		return this.productId;
 	}
 
-	public Double getProductPrice() {
-	  return this.productPrice;
-	}
-	
-	public String getUserId() {
-	  return this.userId;
-	}
-	
-	public String getProfileName() {
-	  return this.profileName;
-	}
-	
-	public Double getHelpfulness() {
-	  return this.helpfulness;
-	}
-	
-	public Double getScore() {
-	  return this.score;
-	}
-	
-	public DateTime getTime() {
-	  return this.time;
-	}
-	
 	public String getText() {
 		return this.text;
-	}
-
-	public String getSummary() {
-		return this.summary;
 	}
 
 	public boolean compareProduct(String currentProduct) {

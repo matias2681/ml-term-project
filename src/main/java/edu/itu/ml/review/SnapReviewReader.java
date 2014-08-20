@@ -17,8 +17,6 @@ public class SnapReviewReader implements ReviewReader {
 	private LineIterator lineIterator; 
 
 	public SnapReviewReader() {
-		// read all file into buffer
-		// parse to Review class
 		URL snapFilePath = this.getClass().getClassLoader()
 				.getResource(Constants.FILE_TO_SNAP_REVIEW_DATA);
 		try {

@@ -23,5 +23,5 @@ public interface Constants {
 	String ERROR_WHILE_OPEN_REVIEW_FILE = "There was an error while opening the reviews file";
 	String INDEX_FOLDER = "index";
 	String FEATURE_FILE_AND_PATH_WITHOUT_NAN = "features-no-nan.csv";
-	char SEPARATOR_SYMBOL = ';';
+	char SEPARATOR_SYMBOL = ',';
 }
