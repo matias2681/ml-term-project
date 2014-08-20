@@ -28,6 +28,8 @@ After that you can import the source code in Eclipse. To import the code to Ecli
 	5) Select the option "Select root directory" press the browse button and
 	select the folder with the source code.
 	6) then press finish.
+Notes: Eclipse may show error message at part of the code.
+Known issue is openJDK may cause eclipse complain @Override for several positions in source code, please feel free to remove or comment them out before start running eclipse.
 
 To generate the file with the features to feed the machine learning algorithm you have 2 options.
 1) Extract all the features (more than 1M) from the Electronics.txt file.
