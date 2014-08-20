@@ -3,6 +3,11 @@ package edu.itu.ml.core;
 import edu.itu.ml.Constants;
 import edu.itu.ml.nlp.SentimentValue;
 
+/**
+ * This class represent a record of a <code>CSV</code> file to make the machine
+ * learning algorithm learn.
+ * 
+ */
 public class FeatureItem {
 
 	private boolean useful;
@@ -37,7 +42,7 @@ public class FeatureItem {
 		private long numSentences;
 		private long numWords;
 		private SentimentValue numSentimental;
-		
+
 		public FeatureItemBuilder useful(boolean useful) {
 			this.useful = useful;
 			return this;
@@ -75,22 +80,24 @@ public class FeatureItem {
 
 	@Override
 	public String toString() {
-		return "FeatureItem [ useful= " + useful + " age=" + age + ", normUserRating=" + normUserRating
-				+ ", numSentences=" + numSentences + ", numWords=" + numWords
-				+ ", numSentimental=" + numSentimental + ", sentimentRating="
-				+ sentimentRating + ", density=" + density
-				+ ", wordsPerSentence=" + wordsPerSentence + "]";
+		return "FeatureItem [ useful= " + useful + " age=" + age
+				+ ", normUserRating=" + normUserRating + ", numSentences="
+				+ numSentences + ", numWords=" + numWords + ", numSentimental="
+				+ numSentimental + ", sentimentRating=" + sentimentRating
+				+ ", density=" + density + ", wordsPerSentence="
+				+ wordsPerSentence + "]";
 	}
 
+	/**
+	 * @return an String array to write as a <code>CSV</code>
+	 */
 	public String[] toCSV() {
 		String[] numSentimentalValues = numSentimental.toCSV();
 		String[] sentimentRatingValues = sentimentRating.toCSV();
 		String[] densityValues = density.toCSV();
-		return new String[] {
-				(useful) ? "useful" : "unuseful",
-				String.valueOf(age),
-				String.valueOf(normUserRating), String.valueOf(numSentences),
-				String.valueOf(numWords),
+		return new String[] { (useful) ? "useful" : "unuseful",
+				String.valueOf(age), String.valueOf(normUserRating),
+				String.valueOf(numSentences), String.valueOf(numWords),
 				numSentimentalValues[Constants.POSITIVE],
 				numSentimentalValues[Constants.NEGATIVE],
 				numSentimentalValues[Constants.OBJECTIVE],
@@ -103,12 +110,15 @@ public class FeatureItem {
 				String.valueOf(wordsPerSentence) };
 	}
 
+	/**
+	 * @return The columns of the record
+	 */
 	public static String[] columns() {
-		return new String[] { "usefulness", "age", "normUserRating", "numSentences",
-				"numWords", "numSentimental+", "numSentimental-",
-				"numSentimentalo", "sentimentRating+", "sentimentRating-",
-				"sentimentRatingo", "density+", "density-", "densityo",
-				"wordsPerSentence" };
+		return new String[] { "usefulness", "age", "normUserRating",
+				"numSentences", "numWords", "numSentimental+",
+				"numSentimental-", "numSentimentalo", "sentimentRating+",
+				"sentimentRating-", "sentimentRatingo", "density+", "density-",
+				"densityo", "wordsPerSentence" };
 	}
 
 }

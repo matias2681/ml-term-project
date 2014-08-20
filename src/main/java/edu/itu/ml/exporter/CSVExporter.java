@@ -10,10 +10,17 @@ import edu.itu.ml.Constants;
 import edu.itu.ml.core.FeatureItem;
 import edu.itu.ml.core.Review;
 
+/**
+ * This class export the features from the reviews in <code>CSV</code> format
+ *
+ */
 public class CSVExporter {
 
 	private CSVWriter writer;
 
+	/**
+	 * Constructor
+	 */
 	public CSVExporter() {
 		try {
 			writer = new CSVWriter(new OutputStreamWriter(new FileOutputStream(
@@ -25,6 +32,10 @@ public class CSVExporter {
 		}
 	}
 
+	/**
+	 * Write the parameter in the file with the specified format.
+	 * @param featureItem a feature extracted
+	 */
 	public void write(FeatureItem featureItem) {
 		try {
 			writer.writeNext(featureItem.toCSV());
@@ -34,6 +45,11 @@ public class CSVExporter {
 		}
 	}
 
+	/**
+	 * Handy method to use with a list of {@link Review}.
+	 * This write the list in a file.
+	 * @param reviews the {@link Review} 
+	 */
 	public void write(List<Review> reviews) {
 		for (Review review : reviews) {
 			write(review.extractFeatures());

@@ -9,6 +9,10 @@ import org.apache.mahout.classifier.sgd.OnlineLogisticRegression;
 
 import com.google.common.collect.Lists;
 
+/**
+ * This class is similar to {@link ReviewClassificationWithTestFileMain} with the difference that the SGD algorithm 
+ * learn from the training file. In this case the name of the file is <code>features-no-nan.csv</code>
+ */
 public class ReviewClassificationMain {
 
 	public static final int NUM_CATEGORIES = 2;

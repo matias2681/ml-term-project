@@ -8,6 +8,10 @@ import edu.itu.ml.core.ReviewProcessor;
 import edu.itu.ml.review.ReviewReader;
 import edu.itu.ml.review.SnapReviewReader;
 
+/**
+ * This class parse all the reviews to process.
+ *
+ */
 public class Parser {
 	
 	private CSVExporter exporter = new CSVExporter();

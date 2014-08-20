@@ -11,9 +11,15 @@ import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 import edu.itu.ml.Constants;
 
+/**
+ * Tokenizer from OpenNLP. It loads an english tokenizer model. For more
+ * information check {@link http://opennlp.sourceforge.net/models-1.5/}
+ * 
+ */
 public class TokenizerML {
 
-	private final static Logger LOG = Logger.getLogger(TokenizerML.class.getName());
+	private final static Logger LOG = Logger.getLogger(TokenizerML.class
+			.getName());
 	private Tokenizer tokenizer = null;
 
 	public TokenizerML() {
@@ -28,17 +34,18 @@ public class TokenizerML {
 			tokenizer = new TokenizerME(tokenModel);
 			LOG.info("Tokenizer model loaded");
 		} catch (final IOException ioe) {
-			ioe.printStackTrace();
+			throw new RuntimeException(Constants.ERROR_LODING_TOKENIZER_MODEL, ioe);
 		} finally {
 			if (modelIn != null) {
 				try {
 					modelIn.close();
 				} catch (final IOException e) {
-				} // oh well!
+					throw new RuntimeException(Constants.ERROR_CLOSING_TOKENIZER_MODEL, e);
+				} 
 			}
 		}
 	}
-	
+
 	public String[] tokenize(String sentence) {
 		return tokenizer.tokenize(sentence);
 	}

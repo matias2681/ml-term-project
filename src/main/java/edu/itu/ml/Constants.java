@@ -2,7 +2,8 @@ package edu.itu.ml;
 
 public interface Constants {
 
-	String ERROR_LOADING_MODEL_OPENNLP = "Error when loading the NLP model";
+	String ERROR_LOADING_POSTAGGER_MODEL = "Error when loading the POSTagger model";
+	String ERROR_CLOSSING_POSTAGGER_MODEL = "There was an error closing the POSTagger model";
 	String FILE_POSTAGGER_MODEL_PERCEPTRON = "en-pos-perceptron.bin";
 	String FILE_TO_SENTI_WORD_NET = "SentiWordNet_3.0.0_20130122.txt";
 	double MAX_NUM_STARS = 5.0;
@@ -24,4 +25,8 @@ public interface Constants {
 	String INDEX_FOLDER = "index";
 	String FEATURE_FILE_AND_PATH_WITHOUT_NAN = "features-no-nan.csv";
 	char SEPARATOR_SYMBOL = ',';
+	String ERROR_CLOSING_TOKENIZER_MODEL = "There was an error closing the tokenizer model";
+	String ERROR_LODING_TOKENIZER_MODEL = "There was an error loading the tokenizer model";
+	String ERROR_LOADING_SENTENCE_DETECTOR_MODEL = "There was an error loading the sentence detector model";
+	String ERROR_CLOSING_SENTENCE_DETECTOR_MODEL = "There was an error closing the sentence detector model";
 }

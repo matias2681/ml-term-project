@@ -11,6 +11,10 @@ import org.apache.mahout.vectorizer.encoders.StaticWordValueEncoder;
 
 import com.google.common.collect.Maps;
 
+/**
+ * This class represent a record from the training and testing file.
+ *
+ */
 public class Feature {
 
 	public static final int FEATURES = 100;

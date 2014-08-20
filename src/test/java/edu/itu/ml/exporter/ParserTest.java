@@ -14,6 +14,7 @@ public class ParserTest extends ReviewBaseTest{
 	public void setUp() throws Exception {
 	}
 
+	@Test
 	public void test() {
 		parser = new Parser();
 		try {
@@ -25,7 +26,7 @@ public class ParserTest extends ReviewBaseTest{
 	
 	@Test
 	public void testParserWithLimit() {
-		parser = new Parser(5000);
+		parser = new Parser(100);
 		try {
 			parser.run();
 		} catch (Exception e) {

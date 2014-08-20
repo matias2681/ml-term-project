@@ -7,13 +7,18 @@ import org.apache.mahout.classifier.sgd.L1;
 import org.apache.mahout.classifier.sgd.OnlineLogisticRegression;
 
 /**
- * This class execute the SGD algorithm with
- *
+ * This class execute the SGD algorithm. Two files are needed to run this
+ * algorithm. The train.csv and the test.csv file. This files must be in the
+ * resources folder <code>src/main/resources</code> The test.csv should have the
+ * name of the columns and can't have the target variable, which in this case is
+ * <code>usefulness</code>
+ * 
  */
 public class ReviewClassificationWithTestFileMain {
 
 	public static final int NUM_CATEGORIES = 2;
-	private final static Logger LOG = Logger.getLogger(ReviewClassificationWithTestFileMain.class.getName());
+	private final static Logger LOG = Logger
+			.getLogger(ReviewClassificationWithTestFileMain.class.getName());
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception {
@@ -30,7 +35,7 @@ public class ReviewClassificationWithTestFileMain {
 					lr.train(observation.getTarget(), observation.asVector());
 				}
 			}
-			
+
 			LOG.info("Measuring AUC");
 			FeaturesParser fpTest = new FeaturesParser("test.csv");
 			Auc eval = new Auc(0.5);

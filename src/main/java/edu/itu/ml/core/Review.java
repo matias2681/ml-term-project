@@ -7,9 +7,13 @@ import org.joda.time.Instant;
 import edu.itu.ml.Constants;
 import edu.itu.ml.nlp.TextAnalysis;
 
+/**
+ * This class represent a {@link Review} from the SNAP file.
+ * 
+ */
 @SuppressWarnings("unused")
 public class Review {
-	
+
 	private final String productId;
 	private final String producTitle;
 	private final double productPrice;
@@ -35,17 +39,17 @@ public class Review {
 		private String summary;
 		private String text;
 		private int upvotes;
-		
+
 		public ReviewBuilder productId(String aProductId) {
 			this.productId = aProductId;
 			return this;
 		}
-		
+
 		public ReviewBuilder producTitle(String aProductTitle) {
 			this.producTitle = aProductTitle;
 			return this;
 		}
-		
+
 		public ReviewBuilder productPrice(String price) {
 			if (Constants.UNKNOWN_PRICE.equals(price)) {
 				this.productPrice = Double.parseDouble("0");
@@ -54,53 +58,54 @@ public class Review {
 			}
 			return this;
 		}
-		
+
 		public ReviewBuilder userId(String aUserId) {
 			this.userId = aUserId;
 			return this;
 		}
-		
+
 		public ReviewBuilder profileName(String aProfileName) {
 			this.profileName = aProfileName;
 			return this;
 		}
-		
+
 		public ReviewBuilder helpfulness(String helpfulnessValue) {
 			String[] nums = helpfulnessValue.split("/");
 			this.upvotes = Integer.parseInt(nums[0]);
-			if (nums[1]!="0") {
-				this.helpfulness = Double.parseDouble(nums[0])/Double.parseDouble(nums[1]);
+			if (nums[1] != "0") {
+				this.helpfulness = Double.parseDouble(nums[0])
+						/ Double.parseDouble(nums[1]);
 			} else {
 				this.helpfulness = 0d;
 			}
 			return this;
 		}
-		
+
 		public ReviewBuilder score(String scoreValue) {
 			this.score = Double.parseDouble(scoreValue);
 			return this;
 		}
-		
+
 		public ReviewBuilder time(String time) {
 			this.time = new DateTime(Long.parseLong(time) * 1000L);
 			return this;
 		}
-		
+
 		public ReviewBuilder summary(String aSummary) {
 			this.summary = aSummary;
 			return this;
 		}
-		
+
 		public ReviewBuilder text(String aText) {
 			this.text = aText;
 			return this;
 		}
-		
+
 		public Review build() {
 			return new Review(this);
 		}
 	}
-	
+
 	public Review(ReviewBuilder reviewBuilder) {
 		this.productId = reviewBuilder.productId;
 		this.producTitle = reviewBuilder.producTitle;
@@ -115,23 +120,25 @@ public class Review {
 		this.upvotes = reviewBuilder.upvotes;
 		this.useful = false;
 	}
-	
+
+	/**
+	 * @return a {@link FeatureItem} with all the predictors variables from the
+	 *         review and also the usefulness value to train the model.
+	 */
 	public FeatureItem extractFeatures() {
 		int days = Days.daysBetween(this.time, Instant.now()).getDays();
 		TextAnalysis textAnalysis = TextAnalysis.getInstance();
 		textAnalysis.analyze(this);
-		
+
 		FeatureItem item = new FeatureItem.FeatureItemBuilder().useful(useful)
-				.age(days)
-				.normUserRating(this.score)
+				.age(days).normUserRating(this.score)
 				.numSentences(textAnalysis.numSentences())
 				.numWords(textAnalysis.numWords())
-				.numSentimental(textAnalysis.getSentiment())
-				.build();
+				.numSentimental(textAnalysis.getSentiment()).build();
 		return item;
 	}
-	
-	public String getProductId(){
+
+	public String getProductId() {
 		return this.productId;
 	}
 
@@ -150,6 +157,5 @@ public class Review {
 	public void markAsUseful() {
 		this.useful = true;
 	}
-	
-	
+
 }

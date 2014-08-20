@@ -12,10 +12,16 @@ import org.apache.commons.io.LineIterator;
 import edu.itu.ml.Constants;
 import edu.itu.ml.core.Review;
 
+/**
+ * This is a reader for Reviews with the SNAP format
+ */
 public class SnapReviewReader implements ReviewReader {
 
 	private LineIterator lineIterator; 
 
+	/**
+	 * Constructor
+	 */
 	public SnapReviewReader() {
 		URL snapFilePath = this.getClass().getClassLoader()
 				.getResource(Constants.FILE_TO_SNAP_REVIEW_DATA);
@@ -26,6 +32,7 @@ public class SnapReviewReader implements ReviewReader {
 		}
 	}
 
+	@Override
 	public Review getNext() {
 		String productId = null;
 		String producTitle = null;
@@ -65,7 +72,7 @@ public class SnapReviewReader implements ReviewReader {
 				} else if (line.matches("review/text: (.*)")) {
 					text = line.substring("review/text: ".length());
 				} else {
-					return null; // throw new Error("review data not complete");
+					return null;
 				}
 			} else {
 				break;
@@ -79,6 +86,7 @@ public class SnapReviewReader implements ReviewReader {
 		return review;
 	}
 
+	@Override
 	public boolean hasNext() {
 		boolean value =  lineIterator.hasNext();
 		if (!value) {

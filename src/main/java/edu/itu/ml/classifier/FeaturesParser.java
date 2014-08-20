@@ -12,6 +12,10 @@ import com.google.common.io.Resources;
 
 import edu.itu.ml.Constants;
 
+/**
+ * This class parse a feature file in <code>CSV</code> format. 
+ *
+ */
 public class FeaturesParser implements Iterable<Feature> {
 
 	private final Splitter onSemi = Splitter.on(Constants.SEPARATOR_SYMBOL)
