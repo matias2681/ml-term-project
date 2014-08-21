@@ -63,7 +63,7 @@ tail -n (N-L) features-no-nan.csv > test.csv
 
 To remove the first column from the test.csv file you can run
 awk 'BEGIN { FS=","; OFS="," } {$1="";gsub(",+",",",$0)}1' test.csv > test-1.csv
-head -1 train.csv | cat - test-1.csv > test.csv
+head -n 1 train.csv | cat - test-1.csv > test.csv
 
 To run the SGD algorithm you can copy those files (train.csv and test.csv) to src/main/resources and
 run ReviewClassificationWithTestFileMain.
