@@ -29,7 +29,20 @@ After that you can import the source code in Eclipse. To import the code to Ecli
 	select the folder with the source code.
 	6) then press finish.
 Notes: Eclipse may show error message at part of the code.
-Known issue is openJDK may cause eclipse complain @Override for several positions in source code, please feel free to remove or comment them out before start running eclipse.
+Known issue is openJDK may cause eclipse complain @Override for several positions in source code, please 
+feel free to remove or comment them out before start running eclipse.
+
+Before use use the classifier is necessary to download some models used by OpenNLP.
+You can download the binary files from http://opennlp.sourceforge.net/models-1.5/
+Also, you need to copy or move those files to the folder /src/main/resources
+The models are:
+1) POSTagger Model en-pos-perceptron.bin (http://opennlp.sourceforge.net/models-1.5/en-pos-perceptron.bin)
+2) Sentence Detector Model en-sent.bin (http://opennlp.sourceforge.net/models-1.5/en-sent.bin)
+3) Tokenizer Model en-token.bin (http://opennlp.sourceforge.net/models-1.5/en-token.bin)
+
+Also to do the sentiment analysis is necessary to download the database from SentiWordNet.
+You can download from http://sentiwordnet.isti.cnr.it/download.php and you need to copy to the folder
+src/main/resources
 
 To generate the file with the features to feed the machine learning algorithm you have 2 options.
 1) Extract all the features (more than 1M) from the Electronics.txt file.
