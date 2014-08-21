@@ -34,18 +34,19 @@ public class ReviewClassificationWithTestFileMain {
 				for (Feature observation : fpTraining) {
 					lr.train(observation.getTarget(), observation.asVector());
 				}
+				LOG.info("Measuring AUC");
+				FeaturesParser fpTest = new FeaturesParser("test.csv");
+				Auc eval = new Auc(0.5);
+				LOG.info("Loading test sample");
+				for (Feature testCall : fpTest) {
+					eval.add(testCall.getTarget(),
+							lr.classifyScalar(testCall.asVector()));
+				}
+				System.out.printf("%.4f, %.4f\n", lr.currentLearningRate(),
+						eval.auc());
 			}
+			
 
-			LOG.info("Measuring AUC");
-			FeaturesParser fpTest = new FeaturesParser("test.csv");
-			Auc eval = new Auc(0.5);
-			LOG.info("Loading test sample");
-			for (Feature testCall : fpTest) {
-				eval.add(testCall.getTarget(),
-						lr.classifyScalar(testCall.asVector()));
-			}
-			System.out.printf("%.4f, %.4f\n", lr.currentLearningRate(),
-					eval.auc());
 		}
 	}
 

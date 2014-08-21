@@ -19,7 +19,7 @@ import edu.itu.ml.Constants;
 public class FeaturesParser implements Iterable<Feature> {
 
 	private final Splitter onSemi = Splitter.on(Constants.SEPARATOR_SYMBOL)
-			.trimResults(CharMatcher.anyOf("\" ;"));
+			.trimResults(CharMatcher.anyOf("\" ,"));
 	private String resourceName;
 
 	public FeaturesParser(String resourceName) throws IOException {
